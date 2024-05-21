@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Hermandad Gran Poder </title>
+    <title> Santa Rita Casia </title>
     <link rel="stylesheet" href="{{asset('Estilos/style.css')}}">
-    <link rel="shortcut icon" href="{{asset('Estilos/Imagenes/logo.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('Estilos/Imagenes/Rosa.png')}}" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
 <body>
 
     <div id = "cabecera">
         <div id = "logo">
-            <a href="paginaPrincipal.php"><img src="{{asset('Estilos/Imagenes/banner.png')}}" alt="logo"></a>
+            <img src="{{asset('Estilos/Imagenes/BannerS.png')}}" alt="logo">
         </div>
 
         <div id = "menu">
             <ul>
                 <!-- Aqui iran los enlaces a las distintas paginas de la web -->
-                <li><a href="historiaHermandad.php">Historia de Hermandad</a></li>
-                <li><a href="videoTeca.php">Galeria de la hermandad</a></li>
-                <li><a href="contacto.php">Contacto</a></li>
+                <li><a href="{{route('historiaHermandad')}}">Historia de la Santa</a></li>
+                <li><a href="{{route('fototecaHermandad')}}">Galeria de la hermandad</a></li>
+                <li><a href="{{route('contactoHermandad')}}">Contacto</a></li>
                 <!-- Aqui irian los enlaces para acceder como hermano -->
                 <li><a href="{{ route('hermanos.registroHermanos') }}">Hazte Hermano</a></li>
                 <li><a href="{{ route('hermanos.accesoHermanos') }}">Acceso Hermanos</a></li>

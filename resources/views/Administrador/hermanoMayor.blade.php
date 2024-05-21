@@ -1,6 +1,9 @@
 @extends('plantillas.plantillaAdmin')
 
 @section('menu')
+
+    <li><a href="{{ route('hermanos.paginaHermanos') }}">Pagina Inicio</a></li>
+    <li><a href="{{ route('hermanos.consultarCuotas') }}">Consultar Cuota</a></li>
     <li>
         <a href="{{ route('administrador.gestionCuotas.panelCuotas') }}">Gestionar Cuotas</a>
     </li>
@@ -59,19 +62,9 @@
     </script>
 </div>
 
-<!-- Grafico de cultos en el ultimo año -->
 
-<div class="container">
-    <h1>Gráfico de Cultos en el último año</h1>
-    <canvas id="graficoCultos"></canvas>
-</div>
 
-<!-- Grafico de cuotas en el ultimo año -->
 
-<div class="container">
-    <h1>Gráfico de Cuotas en el último año</h1>
-    <canvas id="graficoCuotas"></canvas>
-</div>
 
 @endsection
 

@@ -56,6 +56,20 @@ return [
             'throw' => false,
         ],
 
+        'public' => [
+            'driver' => 'local',
+            'root' => public_path('justificantes'), // Ruta donde se almacenarán los archivos
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => public_path('patrimonio'), // Ruta donde se almacenarán los archivos
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

@@ -1,12 +1,16 @@
 @extends('plantillas.plantillaAdmin')
 
 @section('menu')
+
+    <li><a href="{{ route('hermanos.paginaHermanos') }}">Pagina Inicio</a></li>
     <li>
         <a href="{{ route('administrador.GestionPatrimonio.panelPatrimonio') }}">Gestionar Patrimonio</a>
     </li>
     <li>
         <a href="{{ route('administrador.GestionPatrimonio.anadirPatrimonio') }}">Añadir Patrimonio</a>
     </li>
+    <li><a href="{{ route('hermanos.consultarCuotas') }}">Consultar Cuota</a></li>
+
 
 
 @endsection
@@ -18,8 +22,14 @@
         @csrf
         <label for="nombre">Buscar Patrimonio por Nombre:</label>
         <input type="text" id="nombre" name="nombre" placeholder="nombre del patrimonio">
-        <input type="submit" value="Buscar">
+
+        <!-- Línea divisoria -->
+        <hr class="linea-divisoria">
     </form>
+
+    <div class="containerPatrimonios">
+
+    </div>
 
     <div class="container">
         @foreach($patrimonios as $patrimonio)
@@ -30,22 +40,12 @@
                 <div class="DatosFormulario">
                     <h2>Nombre: </h2>
                     <p>{{ $patrimonio->nombre }}</p>
-                    <h2>Descripción: </h2>
-                    <p>{{ $patrimonio->descripcion }}</p>
-                    <!-- Agrega más campos según tus necesidades -->
                     <h2>Fecha de Adquisición: </h2>
-                    <p>{{ $patrimonio->fecha_adquisicion }}</p>
-                    <h2>Valor: </h2>
-                    <p>{{ $patrimonio->valor }}</p>
+                    <p>{{ \Carbon\Carbon::parse($patrimonio->fecha_adquisicion)->format('Y-m-d') }}</p>
                     <h2>Ubicación: </h2>
                     <p>{{ $patrimonio->ubicacion }}</p>
-                    <h2>Observaciones: </h2>
-                    <p>{{ $patrimonio->observaciones }}</p>
                     <h2>Estado: </h2>
                     <p>{{ $patrimonio->estado }}</p>
-                    <h2>Tipo: </h2>
-                    <p>{{ $patrimonio->tipo }}</p>
-                    <!-- Fin de los campos -->
                 </div>
                 <div class="BotonesDatosFormulario">
                     <a href="{{ route('administrador.GestionPatrimonio.modificarPatrimonio', ['id' => $patrimonio->id]) }}" class="btn btn-warning">Modificar</a>
@@ -59,6 +59,11 @@
                 </div>
             </div>
         @endforeach
+
+        <div class="pagination-container">
+            {{ $patrimonios->links() }}
+        </div>
+
         @if($patrimonios->isEmpty())
             <h2>No hay patrimonios</h2>
         @endif
@@ -84,6 +89,34 @@
                 document.getElementById('formEliminarPatrimonio').submit();
             }
         }
+
+        $(document).ready(function() {
+    $('#nombre').on('input', function() {
+        var nombre = $(this).val();
+        if (nombre != '') {
+            $.ajax({
+                url: "{{ route('administrador.GestionPatrimonio.consultarPatrimonioNombreAdmin') }}",
+                method: "GET",
+                data: {nombre: nombre},
+                success: function(data) {
+                    $('.containerPatrimonios').html(data);
+                }
+            });
+        } else {
+            // Si el campo está vacío oculto el div containerPatrimonios
+            $.ajax({
+                url: "{{ route('administrador.GestionPatrimonio.consultarPatrimonioNombreAdmin') }}",
+                method: "GET",
+                data: {nombre: nombre},
+                success: function(data) {
+                    $('.containerPatrimonios').html('');
+                }
+            });
+        }
+    });
+});
+
     </script>
 @endsection
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

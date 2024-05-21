@@ -1,5 +1,7 @@
 @extends('plantillas.plantillaHermanos')
 
+
+
 @section('contenido')
 
     <h1>Cuotas Pendientes </h1>
@@ -23,11 +25,16 @@
                     <h2>Pagada: </h2>
                     <p>{{ $cuota->pagada ? 'Sí' : 'No' }}</p>
 
-                    <!-- Botón para pagar la cuota -->
-                    <a href="{{ route('hermanos.mostrar', ['cuotaId' => $cuota->id]) }}" class="btn btn-success">Pagar Cuota</a>
+                    @if(!$cuota->pagada)
+                        <!-- Botón para pagar la cuota -->
+                        <a href="{{ route('hermanos.mostrar', ['cuotaId' => $cuota->id]) }}" class="btn btn-success">Pagar Cuota</a>
+                    @endif
                 </div>
             </div>
         @endforeach
+        <div class="pagination-container">
+            {{ $cuotas->links() }}
+        </div>
     </div>
 
 @endsection

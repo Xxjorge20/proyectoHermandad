@@ -13,30 +13,59 @@ class CultoSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
         $faker = Faker::create();
 
-        // Crear 20 cultos ficticios
-        for ($i = 0; $i < 100; $i++) {
+        // Obtener la ruta de la carpeta de imágenes de cultos
+        $rutaCarpeta = public_path('estilos/imagenes/cultos');
+        $archivos = File::files($rutaCarpeta);
+
+        // Año actual
+        $anio = date('Y');
+
+        // Crear los cultos para los domingos del año en curso
+        foreach ($this->getDomingosDelAnio($anio) as $domingo) {
+            // Crear culto para cada domingo
             $culto = Culto::create([
-                'nombre' => $faker->sentence,
-                'descripcion' => $faker->paragraph,
-                'fecha' => $faker->date,
-                'hora' => $faker->time,
-                'lugar' => $faker->word,
-                'aforo' => $faker->randomNumber,
-                'imagen' => $faker->imageUrl,
+                'nombre' => 'Dia del Señor',
+                'descripcion' => 'Misa del domingo en la Parroquia Nuestra Señora de la Asunción oficiada por el Parroco Don Manuel Rabadan.',
+                'fecha' => $domingo,
+                'hora' => '12:00:00', // Hora de la misa
+                'lugar' => 'Parroquia Nuestra Señora de la Asunción',
+                'aforo' => 100,
+                'imagen' => $archivos[4], // Imagen misa.png
             ]);
 
-            // Obtener algunos hermanos ficticios
-            $hermanos = Hermano::inRandomOrder()->limit(5)->get();
+            // Obtener el hermano con el rol de 17
+            $hermano = Hermano::where('rol', 17)->first();
 
             // Adjuntar hermanos al culto con asignado_por
-            foreach ($hermanos as $hermano) {
-                $culto->hermanos()->attach($hermano->id, ['asignado_por' => $hermano->nombre]);
-            }
-
+            $culto->hermanos()->attach($hermano->id, ['asignado_por' => $hermano->nombre]);
         }
+
     }
+
+    /**
+     * Obtener las fechas de los domingos del año en curso.
+     *
+     * @param int $anio Año para el cual obtener las fechas de los domingos.
+     * @return array Arreglo de fechas de los domingos.
+     */
+    private function getDomingosDelAnio($anio)
+    {
+        $fecha = new DateTime($anio . '-01-01');
+        $domingos = [];
+
+        while ($fecha->format('Y') == $anio) {
+            $diaSemana = $fecha->format('w'); // Obtener el día de la semana
+            if ($diaSemana == 0) { // Si es domingo (0)
+                $domingos[] = $fecha->format('Y-m-d'); // Almacenar la fecha
+            }
+            $fecha->modify('+1 day'); // Avanzar al próximo día
+        }
+
+        return $domingos;
+    }
+
 }

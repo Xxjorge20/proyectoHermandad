@@ -1,0 +1,76 @@
+/* Estilos generales */
+
+body {
+
+    font-family: 'Arial', sans-serif;
+    background-color: #f6f6f6;
+    color: #663399;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+    /* Contenedor principal */
+
+.CajonDatos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Imagen */
+
+.FotoDatos {
+    width: 20%;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.FotoDatos img {
+    max-width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+    /* Datos del hermano */
+
+.DatosFormulario {
+    width: 70%;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+/* Datos de la cuota */
+.DatosCuota {
+    width: 30%;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Línea divisoria */
+.LineaDivisoria {
+    width: 1px;
+    background-color: #ddd;
+    margin: 20px 20px 10px 20px;
+}
+
+/* Opcional: agregar borde a los datos del formulario */
+.DatosFormulario p,
+.DatosCuota p {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}

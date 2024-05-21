@@ -1,8 +1,8 @@
-![Logo](public/Estilos/Imagenes/banner.png)
+![Logo](public/Estilos/Imagenes/bannerS.png)
 
-# Hermandad del Gran Poder Sevilla
+# Real Hermandad de Santa Rita de Casia - Luque
 
-Bienvenido a la plataforma de gestión de hermandad. Este sistema te permite administrar las cuotas, hermanos y eventos de la Hermandad del Gran Poder Sevilla.
+Bienvenido a la plataforma de gestión de hermandad. Este sistema te permite administrar las cuotas, hermanos y eventos de la Hermandad de santa luque.
 
 ## Funcionalidades Principales
 
@@ -32,7 +32,7 @@ Sigue estos pasos para instalar y ejecutar la aplicación:
 
 ```bash
 # Clona el repositorio
-git clone https://github.com/tuusuario/hermandad-gran-poder.git
+git clone https://github.com/Xxjorge20/proyectoHermandad
 
 # Instala las dependencias
 composer install

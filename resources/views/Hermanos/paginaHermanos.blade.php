@@ -1,19 +1,22 @@
 @extends('plantillas.plantillaHermanos')
+<script src="{{ asset('js/contadorVisitas.js') }}"></script>
 @section('contenido')
 
     <!-- Resumen de la actualidad de la hermandad -->
     <h1> Bienvenido {{$hermano->nombre}} a la hermandad </h1>
-    <h2>Resumen de la actualidad de la hermandad</h2>
-    <p>En esta sección se mostrará un resumen de la actualidad de la hermandad, como por ejemplo los cultos que se van a celebrar, las actividades que se van a realizar, etc.</p>
+    <h2>Has visitado tu hermandad: <p id="visitCount"></p> </h2>
 
+
+
+    <h2>Resumen de la actualidad de la hermandad</h2>
     <!-- Consultar cultos -->
-    <h2>Consultar Cultos</h2>
-    <p>En esta sección se mostrarán los cultos que se van a celebrar en la hermandad.</p>
+    <h2>Cultos de la Hermandad</h2>
     <a href="{{ route('hermanos.consultarCultos') }}" class="btn btn-success">Consultar Cultos</a>
-    <br>
-    <br>
+
     <div class="container">
+
             @foreach($cultos as $culto)
+
             <div class="CajonDatos">
                 <div class="FotoDatos">
                     <img src="{{$culto->imagen}}" alt="Imagen del culto">
@@ -24,9 +27,9 @@
                     <h2>Descripción: </h2>
                     <p>{{$culto->descripcion}}</p>
                     <h2>Fecha: </h2>
-                    <p>{{$culto->fecha}}</p>
+                    <p>{{ \Carbon\Carbon::parse($culto->fecha)->format('Y-m-d') }}</p>
                     <h2>Hora: </h2>
-                    <p>{{$culto->hora}}</p>
+                    <p>{{ \Carbon\Carbon::parse($culto->hora)->format('H:i') }}</p>
                     <h2>Lugar: </h2>
                     <p>{{$culto->lugar}}</p>
                 </div>
@@ -38,8 +41,7 @@
     <br>
 
     <!-- Consultar patrimonio -->
-    <h2>Consultar Patrimonio</h2>
-    <p>En esta sección se mostrarán el patrimonio de la hermandad.</p>
+    <h2>Patrimonio de la Hermandad</h2>
     <a href="{{ route('hermanos.consultarPatrimonio') }}" class="btn btn-success">Consultar Patrimonio</a>
 
     <div class="container">
@@ -55,9 +57,8 @@
                     <p>{{ $patrimonio->descripcion }}</p>
                     <h2>Ubicacion: </h2>
                     <p>{{ $patrimonio->ubicacion }}</p>
-
-                    <a href="{{ route('hermanos.consultarPatrimonio') }}" class="btn btn-success">Consultar Patrimonio</a>
                 </div>
+            </div>
         @endforeach
     </div>
 

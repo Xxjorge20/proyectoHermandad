@@ -6,6 +6,8 @@ use App\Http\Controllers\CuotaController;
 use App\Http\Controllers\CultoController;
 use App\Http\Controllers\PatrimonioController;
 use App\Http\Controllers\GraficosController;
+use App\Http\Controllers\PaypalController;
+use App\Http\Controllers\CorreoController;
 use App\Models\Hermano;
 use App\Models\Cuota;
 use App\Models\Culto;
@@ -22,12 +24,29 @@ use App\Models\Patrimonio;
 |
 */
 
+// Rutas antes del login
+
 // Página de inicio
 Route::get('/', function () {
     return view('paginaInicio');
-});
+})->name('paginaInicio');
 
-// Rutas antes del login
+// Pagina historia hermandad
+Route::get('historiaHermandad', function () {
+    return view('historiaHermandad');
+})->name('historiaHermandad'); // Mueve la llamada a name() al final de la definición de la ruta
+
+Route::get('fototecaHermandad', function () {
+    return view('fototecaHermandad');
+})->name('fototecaHermandad');
+
+Route::get('contactoHermandad', function () {
+    return view('contactoHermandad');
+})->name('contactoHermandad');
+
+Route::post('/enviar-correo', [CorreoController::class, 'enviarCorreo'])->name('enviarCorreo');
+
+
 Route::get('/hermanos/accesoHermanos',[HermanoController::class,'accesoHermanos'])->name('hermanos.accesoHermanos');
 Route::post('/hermanos/login',[HermanoController::class,'login'])->name('hermanos.login');
 Route::get('/hermanos/olvioContrasena',[HermanoController::class,'olvidoContrasena'])->name('hermanos.olvidoContrasena');
@@ -48,11 +67,17 @@ Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.
 
 
 // Rutas después del login - Hermanos
-Route::get('/hermanos/paginaHermanos/{hermano}{cultos?}{patrimonios?}', [HermanoController::class, 'paginaHermanos'])->name('hermanos.paginaHermanos');
+Route::get('/hermanos/paginaHermanos/{hermano?}{cultos?}{patrimonios?}', [HermanoController::class, 'paginaHermanos'])->name('hermanos.paginaHermanos');
 // Consultar Cultos
 Route::get('/hermanos/consultarCultos/{cultos?}',[HermanoController::class,'consultarCultos'])->name('hermanos.consultarCultos');
 // Consultar Culto por nombre
 Route::get('/hermanos/consultar-culto-nombre', [CultoController::class, 'consultarCultoNombre'])->name('consultarCultoNombre');
+// Consultar Culto por mes
+Route::get('/hermanos/consultar-culto-mes', [CultoController::class, 'consultarCultoPorMes'])->name('consultarCultoPorMes');
+
+// Consultar Cultos por mes admin
+Route::get('/administrador/GestionCultos/consultarCultoPorMesAdmin', [CultoController::class, 'consultarCultoPorMesAdmin'])->name('consultarCultoPorMesAdmin');
+
 // Consultar Patrimonio
 Route::get('/hermanos/consultarPatrimonio/{patrimonio?}',[PatrimonioController::class,'consultarPatrimonio'])->name('hermanos.consultarPatrimonio');
 // Consultar Patrimonio por nombre
@@ -67,6 +92,12 @@ Route::get('/hermanos/mostrarCuota/{cuotaId}',[CuotaController::class,'mostrarCu
 Route::get('/hermanos/pagoCuotas/{cuotaId}', [CuotaController::class, 'pagarCuota'])->name('cuota.pagarCuotas');
 Route::get('/hermanos/executePayment', [CuotaController::class, 'executePayment'])->name('cuota.executePayment');
 Route::get('/hermanos/cancelPayment', [CuotaController::class, 'cancelPayment'])->name('cuota.cancelPayment');
+Route::get('/hermanos/actualizarCuotaPagada/{cuotaId}', [CuotaController::class, 'actualizarCuotaPagada'])->name('cuota.actualizarCuotaPagada');
+// Adjuntar justificante
+Route::post('subir-justificante/{cuotaId}', [CuotaController::class, 'subirJustificante'])->name('subirJustificante');
+// Menu del hermano
+Route::get('/menu-hermano', [HermanoController::class, 'menuHermano'])->name('menu.hermano');
+
 // Imprimir recibo
 Route::get('/hermanos/imprimirRecibo/{cuotaId}', [CuotaController::class, 'imprimirRecibo'])->name('cuota.imprimirRecibo');
 
@@ -75,7 +106,11 @@ Route::get('/hermanos/imprimirRecibo/{cuotaId}', [CuotaController::class, 'impri
 Route::get('/administrador/GestionCuotas/panelCuotas',[CuotaController::class,'panelCuotas'])->name('administrador.gestionCuotas.panelCuotas')->middleware('auth');
 Route::get('/administrador/GestionCuotas/anadirCuota',[CuotaController::class,'crearCuota'])->name('administrador.gestionCuotas.anadirCuota')->middleware('auth');
 Route::post('/administrador/GestionCuotas/store',[CuotaController::class,'store'])->name('administrador.cuotas.store')->middleware('auth');
-Route::get('/administrador/GestionCuotas/consultarCuotasDNI',[CuotaController::class,'consultarCuotaDNI'])->name('administrador.gestionCuotas.consultarCuotaDNI')->middleware('auth');
+Route::match(['get', 'post'], '/administrador/GestionCuotas/consultarCuotasDNI',[CuotaController::class,'consultarCuotaDNI'])->name('administrador.gestionCuotas.consultarCuotaDNI')->middleware('auth');
+Route::match(['get', 'post'] ,'/administrador/GestionCuotas/consultarCuotasNombre', [CuotaController::class, 'consultarCuotasPorNombre'])
+    ->name('administrador.gestionCuotas.consultarCuotasNombre')
+    ->middleware('auth');
+
 
 
 // Rutas después del login - Administrador - Cultos
@@ -105,6 +140,8 @@ Route::get('/administrador/GestionHermano/modificarHermano/{id}{cargos?}',[Herma
 Route::put('/administrador/GestionHermano/update/{id}',[HermanoController::class,'update'])->name('administrador.GestionHermano.update')->middleware('auth');
 Route::delete('/administrador/GestionHermano/eliminarHermano/{id}',[HermanoController::class,'destroy'])->name('administrador.GestionHermano.eliminarHermano')->middleware('auth');
 Route::get('/administrador/GestionHermano/consultarHermanoDNI',[HermanoController::class,'consultarHermanoDNI'])->name('administrador.GestionHermano.buscarHermano')->middleware('auth');
+Route::get('/administrador/GestionHermano/consultarHermanoNombre',[HermanoController::class,'consultarHermanoNombre'])->name('administrador.GestionHermano.consultarHermanoNombre')->middleware('auth');
+
 
 // Rutas después del login - Administrador - HermanoMayor
 Route::get('/administrador/hermanoMayor',[HermanoController::class,'panelHermanoMayor'])->name('administrador.hermanoMayor')->middleware('auth');
@@ -112,5 +149,10 @@ Route::get('/administrador/hermanoMayor',[HermanoController::class,'panelHermano
 /* Rutas para los gráficos */
 
 Route::get('/grafico-hermanos-por-ano', [GraficosController::class,'graficoHermanosPorAno'])->name('grafico.hermanos.por.ano');
-Route::get('/graficos/cultos', 'GraficosController@graficoCultos')->name('graficos.cultos');
-Route::get('/graficos/cuotas', 'GraficosController@graficoCuotas')->name('graficos.cuotas');
+Route::get('/grafico-cultos-por-ano', [GraficosController::class,'graficoCultosPorAno'])->name('grafico.cultos.por.ano');
+
+/* Ruta pago paypal */
+
+Route::get('/hermanos/paywithpaypal/{cuotaId}', [PaypalController::class, 'payWithPaypal'])->name('hermanos.paywithpaypal');
+Route::post('/hermanos/paypal', [PaypalController::class, 'postPaymentWithpaypal'])->name('hermanos.paypal');
+Route::get('/hermanos/paypal', [PaypalController::class, 'getPaymentStatus'])->name('hermanos.status');

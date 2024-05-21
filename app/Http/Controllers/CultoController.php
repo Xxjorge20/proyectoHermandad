@@ -9,21 +9,36 @@ use App\Models\Culto;
 
 class CultoController extends Controller
 {
-    // Panel cultos
+
+    /**
+     * Muestra el panel para gestionar los cultos.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function panelCultos(){
 
         // Obtenemos todos los cultos
-        $cultos = Culto::all();
+        $cultos = Culto::paginate(5);
 
         return view('administrador.GestionCultos.panelCultos', compact('cultos'));
     }
-    // Crear culto
+
+
+    /**
+     * Método para mostrar la vista de creación de un nuevo culto.
+     *
+     * @return \Illuminate\View\View
+     */
     public function crearCulto(){
         return view('administrador.GestionCultos.anadirCultos');
     }
 
-
-    // Almacenar culto
+    /**
+     * Almacena un nuevo culto en la base de datos.
+     *
+     * @param  \Illuminate\Http\Request  $request  La solicitud HTTP que contiene los datos del culto a almacenar.
+     * @return \Illuminate\Http\RedirectResponse  Una respuesta de redirección.
+     */
     public function store(Request $request){
 
         try {
@@ -50,13 +65,26 @@ class CultoController extends Controller
     }
 
 
-    // Editar culto
+    /**
+     * Editar culto
+     *
+     * Este método se encarga de recuperar un culto específico por su ID y devuelve la vista para modificarlo.
+     *
+     * @param int $id El ID del culto que se va a modificar
+     * @return \Illuminate\View\View La vista para modificar el culto
+     */
     public function modificarCulto($id){
         $culto = Culto::find($id);
         return view('administrador.GestionCultos.modificarCultos', compact('culto'));
     }
 
-    // Actualizar culto
+    /**
+     * Actualiza un culto.
+     *
+     * @param  \Illuminate\Http\Request  $request  La instancia del objeto Request que contiene los datos de la solicitud
+     * @param  int  $id  El ID del culto que se va a actualizar
+     * @return \Illuminate\Http\RedirectResponse  Una instancia de RedirectResponse que redirige a la página de administración de cultos
+     */
     public function update(Request $request, $id){
         try {
             // Obtén el hermano autenticado
@@ -75,11 +103,16 @@ class CultoController extends Controller
             return redirect()->route('administrador.GestionCultos.panelCultos')->with('success', 'Culto actualizado exitosamente');
         } catch (\Exception $e) {
             // Si ocurre un error, redirige con un mensaje de error
-            return redirect()->route('administrador.GestionCultos.panelCultos')->with('error', 'Error al actualizar el culto');
+            return redirect()->route('administrador.GestionCultos.panelCultos')->with('error', 'Error al actualizar el culto', $e->getMessage());
         }
     }
 
-    // Eliminar culto
+    /**
+     * Elimina un culto.
+     *
+     * @param  int  $id  El ID del culto a eliminar.
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy($id){
         try {
             // Obtén el hermano autenticado
@@ -104,19 +137,62 @@ class CultoController extends Controller
         }
     }
 
-    // Consultar culto por nombre
+    /**
+     * Consultar cultos por nombre desde el hermano.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\View
+     */
     public function consultarCultoNombre(Request $request)
     {
         $nombre = $request->input('nombre');
-        $cultos = Culto::where('nombre', 'LIKE', "%{$nombre}%")->get();
+        // Busca los cultos que coincidan con el nombre proporcionado
+        $cultos = Culto::where('nombre', 'LIKE', "%{$nombre}%")->paginate(5);
         return view('hermanos.consultarCultos', compact('cultos'));
     }
 
-    // Consultar cultos por nombre desde el panel de administrador
+    public function consultarCultoPorMes(Request $request)
+    {
+        $mes = $request->mes;
+
+        // Almacena el mes seleccionado en una variable de sesión
+        session(['mesSeleccionado' => $mes]);
+
+        // Realiza la búsqueda de cultos por el mes seleccionado
+        $cultos = Culto::whereMonth('fecha', $mes)->paginate(5);
+
+        // Asegura que el mes se pase también a la vista para la paginación
+        return view('hermanos.consultarCultos', compact('cultos', 'mes'));
+    }
+
+
+
+
+    /**
+     * Consultar cultos por nombre desde el panel de administrador.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\View
+     */
     public function consultarCultoNombreAdmin(Request $request)
     {
         $nombre = $request->input('nombre');
-        $cultos = Culto::where('nombre', 'LIKE', "%{$nombre}%")->get();
-        return view('administrador.GestionCultos.panelCultos', compact('cultos'));
+        // Busca los cultos que coincidan con el nombre proporcionado
+        $cultos = Culto::where('nombre', 'LIKE', "%{$nombre}%")->paginate(5);
+        return view('administrador.GestionCultos.datosCultos', compact('cultos'));
+    }
+
+    public function consultarCultoPorMesAdmin(Request $request)
+    {
+        $mes = $request->mes;
+
+        // Almacena el mes seleccionado en una variable de sesión
+        session(['mesSeleccionado' => $mes]);
+
+        // Realiza la búsqueda de cultos por el mes seleccionado
+        $cultos = Culto::whereMonth('fecha', $mes)->paginate(5);
+
+        // Asegura que el mes se pase también a la vista para la paginación
+        return view('administrador.GestionCultos.panelCultos', compact('cultos', 'mes'));
     }
 }

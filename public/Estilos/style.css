@@ -1,7 +1,7 @@
 /* Definicion de Vaariables */
 :root {
-    --color-primario: #580679;
-    --color-secundario: #8e44ad;
+    --color-primario: #800c1c;
+    --color-secundario: #e73c37;
     --color-blanco: #ffffff;
     --color-negro: #000000;
 }
@@ -17,68 +17,104 @@ body {
     font-size: 16px; /* Tamaño de fuente predeterminado */
 }
 
-/* Ordenador */
-@media (min-width: 991px){
-
+/*  Estilos para los textos    */
 
 /* Estilos para los Textos */
 
-    h3 {
-        color: var(--color-primario);
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 1.2em;
-        padding: 15px;
-        text-align: center;
-    }
+h3 {
+    color: var(--color-primario);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    padding: 15px;
+    text-align: center;
+}
 
-    h1 {
-        color: var(--color-primario);
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 2em;
-        padding: 15px;
-        text-align: center;
-    }
+h1 {
+    color: var(--color-primario);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2em;
+    padding: 15px;
+    text-align: center;
+}
 
-    h2 {
-        color: var(--color-secundario); /* Color morado oscuro para los encabezados */
-        margin-bottom: 5px;
-        font-family: 'Courier New', Courier, monospace;
-        font-size: 1.2em;
-    }
+h2 {
+    color: var(--color-secundario); /* Color morado oscuro para los encabezados */
+    margin-bottom: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+}
 
-    p {
-        margin-top: 0;
-        margin-bottom: 10px;
-        color: var(--color-negro);
-    }
+p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--color-negro);
+}
 
-    a {
-        color: var(--color-negro);
-        text-decoration: none
-    }
+a {
+    color: var(--color-negro);
+    text-decoration: none
+}
 
-    a:hover {
-        color: var(--color-blanco);
-        background-color: var(--color-primario);
-    }
+a:hover {
+    color: var(--color-blanco);
+    background-color: var(--color-primario);
+}
 
-    a.neon-button {
-        font-family: 'Arial', sans-serif;
-        font-size: 20px;
-        text-decoration: none;
+a.neon-button {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    text-decoration: none;
 
-        padding: 10px;
+    padding: 10px;
 
-        color: var(--color-blanco);
+    color: var(--color-secundario);
 
-        border-radius: 25px;
+    border-radius: 25px;
 
-        -webkit-mask-image: -webkit-radial-gradient(circle, var(--color-blanco), var(--color-negro));
-        mask-image: radial-gradient(circle, var(--color-blanco), var(--color-negro));
+    -webkit-mask-image: -webkit-radial-gradient(circle, var(--color-blanco), var(--color-negro));
+    mask-image: radial-gradient(circle, var(--color-blanco), var(--color-negro));
 
 
-    }
+}
 
+label,
+input[type="text"],
+input[type="submit"] {
+    color: var(--color-negro);
+}
+
+input[type="submit"] {
+    color: var(--color-blanco);
+}
+
+
+/* Estilos para el elemento select */
+select {
+    appearance: none; /* Elimina los estilos predeterminados del sistema */
+    background-color: var(--color-blanco); /* Fondo blanco */
+    border: 2px solid var(--color-primario); /* Borde sólido con color primario */
+    color: var(--color-negro); /* Texto negro */
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada */
+    font-size: 1em; /* Tamaño de fuente */
+    padding: 10px; /* Espaciado interno */
+    width: 100%; /* Ancho completo */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+/* Estilos para el elemento option dentro del select */
+select option {
+    background-color: var(--color-blanco); /* Fondo blanco */
+    color: var(--color-negro); /* Texto negro */
+}
+
+/* Estilos para el hover del elemento option */
+select option:hover {
+    background-color: var(--color-primario); /* Fondo con color primario al pasar el mouse */
+    color: var(--color-blanco); /* Texto blanco al pasar el mouse */
+}
+
+/* Ordenador */
+@media (min-width: 991px){
 
     /* Estilos para la tabla */
 
@@ -102,7 +138,7 @@ body {
         background-color: var(--color-blanco);
     }
 
-    /* Add a hover effect for rows */
+
     tr:hover {
         background-color: #ff8080;
     }
@@ -138,7 +174,7 @@ body {
 
         border-color: var(--color-primario);
 
-        background-color: #800080;
+        background-color: var(--color-primario);
 
         transition: background-color 0.3s ease, transform 0.2s ease;
 
@@ -149,7 +185,33 @@ body {
         transform: scale(1.1);
     }
 
+    /* Estilo para el input de tipo file */
+    .custom-file-input {
+        color: var(--color-negro);
+        background-color: var(--color-blanco);
+        border: 2px solid var(--color-primario);
+        border-radius: 5px;
+        padding: 10px;
+        width: 200px; /* Ajusta el ancho según tu diseño */
+        font-size: 16px; /* Ajusta el tamaño de fuente según tu diseño */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el input */
+    }
 
+    /* Estilo para el botón */
+    .custom-button {
+        background-color: var(--color-primario);
+        color: var(--color-blanco);
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px; /* Ajusta el tamaño de fuente según tu diseño */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    }
+
+    /* Estilo para el botón al pasar el mouse */
+    .custom-button:hover {
+        background-color: var(--color-secundario); /* Cambia el color al pasar el mouse */
+    }
 
     /*  Estilos para el contenido    */
 
@@ -325,8 +387,6 @@ body {
     }
 
 
-
-
     /* Estilo para el footer */
 
     .pie {
@@ -393,7 +453,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border: 2px solid #8e44ad;
+        border: 2px solid var(--color-secundario);
         border-radius: 10px;
         margin: 10px;
         padding: 20px;
@@ -402,8 +462,8 @@ body {
     }
 
     .FotoDatos img {
-        width: 100px;
-        height: 100px;
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
         object-fit: cover;
         margin-right: 20px;
@@ -439,167 +499,469 @@ body {
         border: none;
     }
 
+    /* Clase para ocultar un elemento */
+    .hidden {
+        display: none;
+    }
+
+    /* Clase para mostrar un elemento */
+    .visible {
+        display: block;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 20px;
+        padding: 15px;
+        text-align: center;
+        color: #e74c3c;
+    }
+
+    /* PAGINACION  */
+
+    /* Estilos de la paginación */
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    .pagination a, .pagination span {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: var(--color-blanco);
+        background-color: var(--color-primario);
+        border: 1px solid var(--color-primario);
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .pagination a:hover, .pagination a:focus {
+        background-color: var(--color-secundario);
+        color: var(--color-blanco);
+    }
+
+    .pagination .active span {
+        background-color: var(--color-secundario);
+        color: var(--color-blanco);
+        border-color: var(--color-secundario);
+    }
+
+    .pagination .disabled span {
+        background-color: var(--color-negro);
+        color: var(--color-blanco);
+        border-color: var(--color-negro);
+        cursor: not-allowed;
+    }
+
+
+    /*  Estilos para el grid container  */
+
+    .container-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual tamaño */
+        grid-gap: 20px; /* Espacio entre las imágenes */
+    }
+
+    .grid-item {
+        text-align: center; /* Centra el contenido */
+    }
+
+    .grid-item img {
+        width: 100%; /* La imagen ocupará todo el ancho del contenedor */
+        height: auto; /* Altura automática para mantener la proporción */
+    }
+
+    .grid-item p {
+        margin-top: 10px; /* Espacio entre la imagen y el texto */
+    }
+
+
+    .linea-divisoria {
+        border: 0;
+        height: 3px;
+        background: var(--color-primario); /* Color de la guía de estilos */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
 }
 
-/* Movil */
-@media (max-width: 767px) {
-    /* Estilos para los Textos */
-    h1, h2, h3 {
-        font-size: 1.5em; /* Reduzco el tamaño de fuente para dispositivos móviles */
-        padding: 10px; /* Reduzco el espacio de relleno */
+@media (max-width: 990px) {
+
+    /* Estilo para las fuentes */
+    h3 {
+        font-size: 1em;
+        padding: 1em;
     }
 
-    /* Otros ajustes de tamaño de fuente o espaciado según sea necesario */
+    h1 {
+        font-size: 1.5em;
+        padding: 1em;
+    }
+
+    h2 {
+        font-size: 1em;
+    }
+
+    a.neon-button {
+        font-size: 1em;
+        padding: 0.5em;
+        border-radius: 0.5em;
+    }
+
+    label,
+    input[type="text"],
+    input[type="submit"] {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        margin-left: 0; /* Elimina el margen izquierdo */
+        margin-right: 0; /* Elimina el margen derecho */
+        color: var(--color-negro);
+    }
+
+    input[type="submit"] {
+        margin-top: 10px; /* Agrega espacio entre los elementos */
+        color: var(--color-blanco);
+        font-family: 'Arial', sans-serif;
+        font-size: 18px;
+        text-decoration: none;
+        padding: 15px 20px;
+        border-radius: 10px;
+        border-color: var(--color-primario);
+        background-color: var(--color-primario);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="submit"]:hover {
+        background-color: var(--color-primario);
+        transform: scale(1.1);
+    }
+
+
+    /* Estilos para la cabecera */
+    #logo img {
+        max-width: 100%;
+        height: auto;
+    }
+
+
+    #menu ul {
+        flex-direction: column;
+        border-top: none;
+    }
+
+    #menu li {
+        border-right: none;
+        border-bottom: 2px solid var(--color-primario);
+        padding: 15px;
+        text-align: center;
+    }
+
+    #menu li:last-child {
+        border-bottom: none;
+    }
+
+    #menu li {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 20px;
+        color: var(--color-primario);
+    }
+
+    .submenu {
+        background-color: var(--color-blanco);
+    }
+
+
+    #menu li:hover {
+        background-color: var(--color-secundario);
+        color: var(--color-blanco);
+    }
+
+
+    #menu li + li {
+        margin-top: 2px;
+    }
 
     /* Estilos para la tabla */
-    table {
-        width: 100%; /* Hago que la tabla ocupe el ancho completo */
-        font-size: 14px; /* Reduzco el tamaño de fuente de la tabla */
+
+
+    th,
+    td {
+        padding: 0.5em;
+        text-align: center;
     }
 
-    th, td {
-        padding: 8px; /* Reduzco el espacio de relleno de las celdas de la tabla */
+    th {
+        background-color: #333;
+        color: var(--color-blanco);
     }
 
-    /* Otros ajustes de tamaño de fuente o espaciado según sea necesario */
-
-    /* Estilos para los labels e Inputs */
-    label, input[type="text"], input[type="submit"] {
-        margin-bottom: 8px; /* Reduzco el espacio entre elementos */
+    tr:nth-child(even) {
+        background-color: var(--color-blanco);
     }
 
-    /* Estilos para el botón de insertar */
-    input[type="submit"] {
-        font-size: 16px; /* Reduzco el tamaño de fuente */
-        padding: 12px 16px; /* Ajusto el relleno del botón */
+    /* Add a hover effect for rows */
+    tr:hover {
+        background-color: #ff8080;
     }
-
-    /* Otros ajustes de tamaño de fuente o espaciado según sea necesario */
 
     /* Estilos para el contenido */
+
     #wrapper {
-        flex-direction: column; /* Cambio la dirección del contenedor principal a columna */
+        display: block;
+        overflow: hidden;
     }
 
-    #contenido, #lateralDerecho {
-        width: 100%; /* Hago que ambos ocupen el ancho completo */
-        margin-left: 0; /* Elimino el margen izquierdo en el lateral derecho */
+
+
+    /* Estilos para el div de contenido */
+    #contenido {
+        display: flex;
+        color: var(--color-blanco);
+        flex-wrap: wrap; /* Permite que el contenido se apile en columnas */
+        justify-content: center; /* Centra el contenido horizontalmente */
+        align-items: flex-start; /* Alinea el contenido en la parte superior */
+        width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 20px; /* Añade espacio interno al contenido */
+
     }
 
-    /* Otros ajustes según sea necesario para dispositivos móviles */
 
-    /* Estilo para el footer */
-    .pie {
-        flex-direction: column; /* Cambio la dirección a columna para los elementos del pie */
-    }
-
-    /* Otros ajustes según sea necesario para dispositivos móviles */
-
-    /* Estilos para el cajón de datos */
-    .CajonDatos {
-        flex-direction: column; /* Cambio la dirección a columna para los elementos del cajón de datos */
-    }
-
-    /* Otros ajustes según sea necesario para dispositivos móviles */
-
-    /* Estilos para alertas */
-    .alert {
-        font-size: 16px; /* Reduzco el tamaño de fuente para alertas en dispositivos móviles */
-    }
-
-    /* Otros ajustes según sea necesario para dispositivos móviles */
-
-    /* Estilos para los botones del formulario */
-    .btn {
-        font-size: 14px; /* Reduzco el tamaño de fuente para botones en dispositivos móviles */
-        padding: 8px 12px; /* Ajusto el relleno de los botones */
-    }
-
-    /* Otros ajustes según sea necesario para dispositivos móviles */
-}
-
-
-/* Tablet */
-@media (min-width: 768px) and (max-width: 990px) {
-    /* Estilos para los Textos */
-    h1, h2, h3 {
-        font-size: 1.8em; /* Ajuste el tamaño de fuente para tablet */
-    }
-
-    /* Otros ajustes según sea necesario para tablet */
-
-    /* Estilos para la tabla */
-    table {
-        font-size: 16px; /* Ajuste el tamaño de fuente para tablet */
-    }
-
-    /* Otros ajustes según sea necesario para tablet */
-
-    /* Estilos para los labels e Inputs */
-    label, input[type="text"], input[type="submit"] {
-        margin-bottom: 10px; /* Ajuste el espacio entre elementos para tablet */
-    }
-
-    /* Estilos para el botón de insertar */
-    input[type="submit"] {
-        font-size: 18px; /* Ajuste el tamaño de fuente para tablet */
-        padding: 15px 20px; /* Ajuste el relleno del botón para tablet */
-    }
-
-    /* Otros ajustes según sea necesario para tablet */
-
-    /* Estilos para el contenido */
-    #wrapper {
-        flex-direction: column; /* Cambio la dirección a columna para tablet */
-    }
-
-    #contenido, #lateralDerecho {
-        width: 100%; /* Hago que ambos ocupen el ancho completo para tablet */
-        margin-left: 0; /* Elimino el margen izquierdo en el lateral derecho para tablet */
-    }
-
-    .twitter-widget {
+    #contenidoHermanos {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+        width: 100%; /* Ajuste del ancho al 100% para ocupar todo el espacio disponible */
+        padding: 20px; /* Ajuste del relleno */
+        color: var(--color-blanco);
+        opacity: 0.8;
+        margin-top: 3%;
+        text-align: center;
+        overflow-y: auto;
+    }
+
+    #rss-container {
+        color: var(--color-blanco);
+        /*border: 1px solid var(--color-primario);*/
+        margin: 0;
+        font-family: Arial, sans-serif;
+        width: 100%;
+    }
+
+    #rss-container img {
+        max-width: 100%; /* Ajusta el tamaño máximo de las imágenes */
+        height: auto; /* Mantiene la proporción de la imagen */
+    }
+
+
+
+    #rss-container ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #rss-container li {
+        margin-bottom: 10px;
+    }
+
+    #rss-container li:last-child {
+        margin-bottom: 0;
+    }
+
+     /* Estilos para #paypal-button-container en dispositivos móviles */
+     #paypal-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 10px;
+    }
+
+    /* Estilos para lateralDerecho */
+    #lateralDerecho {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        /*border-radius: 25px;*/
+        color: var(--color-primario);
+        width: 100%; /* Ajuste del ancho al 100% para ocupar todo el espacio disponible */
+       /* border-style: solid;*/
+       /* border-color: var(--color-primario);*/
+        padding: 10px;
+        margin: 20px 0; /* Ajuste del margen */
+        overflow-y: auto;
+    }
+
+
+    .twitter-widget {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
     }
 
     .twitter-timeline {
-        width: 100%; /* Haz que la anchura sea del 100% del contenedor */
-        max-height: 400px; /* Establece una altura máxima para agregar desplazamiento vertical si es necesario */
-        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es más alto que la altura máxima */
-        border: 1px solid #ddd; /* Añade un borde para separar visualmente el widget de Twitter del resto del contenido */
+        width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
     }
 
-    /* Otros ajustes según sea necesario para tablet */
+    /* Estilos para enlaces  */
+    #enlaces {
+        color: var(--color-primario);
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 20px;
+        padding: 15px;
+        text-align: center;
+    }
 
-    /* Estilo para el footer */
+    /* Estilos para el footer */
     .pie {
-        flex-direction: column; /* Cambio la dirección a columna para los elementos del pie para tablet */
+        margin-top: 3%;
+        display: flex;
+        flex-direction: column; /* Cambio a disposición vertical */
+        justify-content: center;
+        align-items: center;
+        border-top: 2px solid var(--color-primario);
+        border-bottom: 2px solid var(--color-primario);
+        padding: 15px;
+        text-align: center;
     }
 
-    /* Otros ajustes según sea necesario para tablet */
 
-    /* Estilos para el cajón de datos */
-    .CajonDatos {
-        flex-direction: column; /* Cambio la dirección a columna para los elementos del cajón de datos para tablet */
+    /* Estilos para las secciones del footer */
+    .footer-section {
+        border: bottom 2px var(--color-primario);
+        border-top: 2px var(--color-primario);
+        padding: 10px;
+        margin: 10px 0; /* Ajuste del margen vertical */
+        flex: none; /* Eliminación del crecimiento flexible */
     }
 
-    /* Otros ajustes según sea necesario para tablet */
+    /* Estilos para los iconos de redes sociales */
+    .social-icons img {
+        border-radius: 50%;
+        margin: 5px; /* Ajuste del margen entre iconos */
+    }
+    /* Estilos para alerta */
+    .alert-success {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+        text-align: center;
+        color: #155724;
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
 
-    /* Estilos para alertas */
+
+    .alert-danger {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+        text-align: center;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        padding: 15px;
+        margin-bottom: 15px;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+
     .alert {
-        font-size: 16px; /* Ajuste el tamaño de fuente para alertas en tablet */
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+        text-align: center;
     }
 
-    /* Otros ajustes según sea necesario para tablet */
+    .CajonDatos {
+        display: flex;
+        flex-direction: column; /* Cambia la disposición a columna */
+        align-items: center; /* Centra los elementos en el eje horizontal */
+        border: 2px solid var(--color-secundario);
+        border-radius: 10px;
+        margin: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #ecf0f1;
+    }
 
-    /* Estilos para los botones del formulario */
+    /* Estilos para el contenido dentro del CajonDatos */
+    .CajonDatos > * {
+        width: calc(100% - 40px); /* Ocupa todo el ancho disponible menos los márgenes */
+        margin-bottom: 10px; /* Agrega espacio entre cada elemento */
+    }
+
+    /* Ajuste específico para formularios dentro de CajonDatos */
+    .CajonDatos form {
+        width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
+    }
+
+
+
+    .FotoDatos img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0; /* Elimina el margen derecho */
+        margin-bottom: 10px; /* Añade margen inferior para separar la imagen del contenido */
+    }
+
+    .DatosFormulario {
+        margin-bottom: 10px; /* Añade margen inferior para separar del botón */
+    }
+
+    /* Estilos para los botones de formulario en dispositivos móviles */
+    .BotonesDatosFormulario {
+        text-align: center; /* Centra los botones */
+    }
+
     .btn {
-        font-size: 16px; /* Ajuste el tamaño de fuente para botones en tablet */
-        padding: 12px 16px; /* Ajuste el relleno de los botones para tablet */
+        display: block; /* Muestra los botones como bloques para ocupar todo el ancho */
+        margin: 5px auto; /* Centra los botones horizontalmente */
     }
 
-    /* Otros ajustes según sea necesario para tablet */
-}
+    /* Estilos para la paginación en dispositivos móviles */
+    .pagination-container .pagination {
+        display: flex;
+        justify-content: center; /* Centra los enlaces de paginación */
+        flex-wrap: wrap; /* Permite que los enlaces se envuelvan en varias líneas si es necesario */
+    }
 
+    .pagination-container .pagination li {
+        margin: 5px; /* Añade espacio entre los enlaces de paginación */
+    }
+
+    .pagination-container .pagination li a {
+        padding: 6px 10px; /* Reduce el relleno horizontal de los enlaces */
+        font-size: 14px; /* Reduce el tamaño de la fuente para adaptarse mejor a dispositivos móviles */
+    }
+
+    /* Estilos para el grid container en dispositivos móviles */
+    .container-grid {
+        grid-template-columns: repeat(1, 1fr); /* Cambia a una sola columna */
+    }
+
+    .grid-item {
+        margin-bottom: 20px; /* Añade espacio entre los elementos del grid */
+    }
+
+}

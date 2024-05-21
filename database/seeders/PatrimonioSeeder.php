@@ -31,8 +31,8 @@ class PatrimonioSeeder extends Seeder
                 'tipo' => $faker->word,
             ]);
 
-            // Obtener algunos hermanos ficticios
-            $hermanos = Hermano::inRandomOrder()->limit(5)->get();
+            // Obtener algunos con el rol de 15
+            $hermanos = Hermano::where('rol', 15)->inRandomOrder()->take(5)->get();
 
             // Adjuntar hermanos al patrimonio con asignado_por
             foreach ($hermanos as $hermano) {

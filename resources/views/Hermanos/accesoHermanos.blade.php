@@ -1,4 +1,7 @@
 @extends('plantillas.plantilla')
+
+<script src="{{asset('js/validaciones.js')}}"></script>
+
 @section('contenido')
     <div id="contenido">
         <h1>Acceso Hermanos</h1>
@@ -34,6 +37,9 @@
         @endif
 
     </div>
+
+
+
 @endsection
 
 

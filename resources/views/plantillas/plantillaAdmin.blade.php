@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Hermandad Gran Poder </title>
+    <title> Santa Rita Casia </title>
     <link rel="stylesheet" href="{{asset('Estilos/style.css')}}">
-    <link rel="shortcut icon" href="{{asset('Estilos/Imagenes/logo.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('Estilos/Imagenes/Rosa.png')}}" type="image/x-icon">
 </head>
 <body>
 
     <div id = "cabecera">
         <div id = "logo">
-            <a href="paginaPrincipal.php"><img src="{{asset('Estilos/Imagenes/banner.png')}}" alt="logo"></a>
+            <img src="{{asset('Estilos/Imagenes/BannerS.png')}}" alt="logo">
         </div>
 
         <div id="menu">
             <ul>
-                @if(Auth::user()->cargo->nombre == 'Hermano Mayor')
-                    <li><a href="{{ route('administrador.hermanoMayor') }}">Panel Hermano Mayor</a></li>
-                @endif
-
                 @yield('menu')
+                    <!-- menu de administrador si el cargo del hermano es distinto a hermano id 2 -->
+                    @if (Auth::user()->cargo_id != 2)
+                        <li><a href="{{ route('menu.hermano') }}">Panel Administrador</a></li>
+                    @endif
                 <li><a href="{{ route('hermanos.cerrarSesion') }}">Cerrar Sesión</a></li>
             </ul>
         </div>
@@ -38,9 +38,9 @@
             <!-- Widget de los últimos 5 tweets de la hermandad -->
             <div class="twitter-widget">
                 <h3>Últimos Tweets</h3>
-                <a class="twitter-timeline" data-width="400" data-height="400" data-theme="light" href="https://twitter.com/HdadGranPoder?ref_src=twsrc%5Etfw">Tweets by HdadGranPoder</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <a class="twitter-timeline" data-theme="light" href="https://twitter.com/HdadGranPoder?ref_src=twsrc%5Etfw">Tweets by HdadGranPoder</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
-
             <!-- Aquí irá el contenido del lateral derecho de la página (Implementación con blade) -->
             @yield('lateralDerecho')
         </div>

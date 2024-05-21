@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class GraficosController extends Controller
 {
+
+    /**
+     * Obtiene un gráfico que muestra la cantidad de hermanos registrados por año.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function graficoHermanosPorAno()
     {
         $hermanosPorAno = Hermano::selectRaw('YEAR(fecha_alta) as ano, COUNT(*) as cantidad')
@@ -17,15 +23,30 @@ class GraficosController extends Controller
 
         return response()->json($hermanosPorAno);
     }
-
-    public function graficoCultos()
+    /**
+     * Obtiene el gráfico de cultos por año.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function graficoCultosPorAno()
     {
-        // Lógica para obtener datos de cultos en el último año
-        // ...
+        $cultosPorMes = Culto::selectRaw('MONTH(fecha) as mes, COUNT(*) as cantidad')
+            ->whereYear('fecha', date('Y')) // Filtrar por el año actual
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->get();
 
-        return response()->json($datos);
+        dd($cultosPorMes); // Verifica los resultados parciales
+
+        return response()->json($cultosPorMes);
     }
 
+
+    /**
+     * Recupera los datos para el gráfico de cuotas en el último año.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function graficoCuotas()
     {
         // Lógica para obtener datos de cuotas en el último año
